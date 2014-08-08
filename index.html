@@ -1,31 +1,65 @@
 <html> 
 	<head>
 		<style>
+			.invisible{
+				display: none;
+			}
 		</style>
 	</head>	
 	<body>
-		<p> Lets Make something awesome: </p>
+		<p> Lets make something awesome: </p>
 		<h2> What Marvel Hero are you?</h2>
 		<form>
-		  <fieldset>
+		  <fieldset id="question1">
 		    <h3> How would you handle your enemy? </h3>
-		    <input type="radio" name="q1" value="0">A shield bash and good old american ingenuity<br>
-		    <input type="radio" name="q1" value="0">Crush them between your thighs<br>
-		    <input type="radio" name="q1" value="0">SMASH puny enemy<br>
-			<input type="radio" name="q1" value="1">Hit them with your bolt......of lightning
+		    <input type="radio" name="q1" value="1">A shield bash and good old american ingenuity<br>
+		    <input type="radio" name="q1" value="2">Crush them between your thighs<br>
+		    <input type="radio" name="q1" value="4">SMASH puny enemy<br>
+			<input type="radio" name="q1" value="3">Hit them with your bolt......of lightning
 		  </fieldset>
-		  <fieldset>
+		  <fieldset id="question2" class="invisible">
 		  	<h3> Who do you tell about your new super powers? </h3>
-		    <input type="radio" name="q2" value="0">No one...They are safer not knowing<br>
-		    <input type="radio" name="q2" value="0">My crush to impress her. Chicks dig a man in spandex<br>
-		    <input type="radio" name="q2" value="0">My Best Friend<br>
-			<input type="radio" name="q2" value="1">The World
+		    <input type="radio" name="q2" value="4">No one...They are safer not knowing<br>
+		    <input type="radio" name="q2" value="3">My crush to impress her. Chicks dig a man in spandex<br>
+		    <input type="radio" name="q2" value="1">My Best Friend<br>
+			<input type="radio" name="q2" value="2">The World
 		  </fieldset>
 		</form>
+		<h2 id="UR" class="invisible"> You are </h2>
+		<img src="#" class="invisible">
 		<script src="http://code.jquery.com/jquery-2.1.1.min.js">
 		</script>
 		<script>
-
+				$('input[name="q1"]').click(function(){	
+				    $("#question1").fadeOut("slow", function(){
+				    	$("#question2").show();
+				    });
+				});
+				$('input[name="q2"]').click(function(){	
+				    $("#question2").fadeOut("slow", function(){
+				    	var x = parseInt($('input[name="q1"]:checked').val());
+				    	x += parseInt($('input[name="q2"]:checked').val());
+				    	var url = "";
+				    	var hero = "";
+				    	if(x <= 2){
+				    		url = "http://th02.deviantart.net/fs48/PRE/f/2009/193/9/f/9fd8900fe9a52452b4183490fddb7c53.jpg";
+				    		hero = "Captian America";
+				    	}else if(x <= 4){
+				    		url = "http://fc06.deviantart.net/fs29/i/2008/172/5/f/BlackWidow_by_MDiPascale.jpg";
+				    		hero = "Black Widow";
+				    	}else if(x <= 6){
+				    		url = "http://fc02.deviantart.net/fs23/i/2007/331/2/f/Spiderman_by_superdot.jpg";
+				    		hero = "Spiderman";
+				    	}else{
+				    		url = "http://th05.deviantart.net/fs31/PRE/f/2008/199/3/b/HULK_by_el_grimlock.jpg";
+				    		hero = "Hulk";
+				    	}
+				    	$("img").attr('src', url); 
+				    	$("#UR").append(hero);
+				    	$("img").show();
+				    	$("#UR").show();
+				    });
+				});
 		</script>
 	</body>
 </html>
